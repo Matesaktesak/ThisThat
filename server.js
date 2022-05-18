@@ -41,7 +41,7 @@ app.get('/500', (req, res, next) => {
 });
 
 
-app.post("/poll", (req, res) =>{
+app.post("/poll", (req, res) => {
     let postdata = "";
     req.on("data", function (chunk) {
         postdata += chunk.toString();
@@ -55,7 +55,7 @@ app.post("/poll", (req, res) =>{
 });
 
 // Evaluate request with a poll vote incoming
-app.post("/poll/:pollcode/", (req, res, next) =>{
+app.post("/poll/:pollcode/", (req, res, next) => {
     let pollcode = req.params["pollcode"];
     let polldataFile = "./polldata/" + pollcode.toString() + ".json";
 
@@ -86,7 +86,6 @@ app.post("/poll/:pollcode/", (req, res, next) =>{
                         if (!err) {
                             polldata = JSON.parse(polldata);
                             let content = polldata.content;
-                            let response = null;
 
                             // Registering a vote
                             if (polldata.active && content[post.choice] != null && content[post.other] != null && post.choice != "" && post.other != "") {
@@ -163,7 +162,7 @@ app.get("/resetallpollkeystozero/:pollcode/", (req, res, next) => {
 });
 
 // Last non-error handling middleware - 404 When nothing else has responded
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.status(404);
 
     res.format({
