@@ -141,14 +141,14 @@ app.post("/poll/:pollcode/", (req, res, next) => {
 // Poll request with no answer
 app.get("/poll/:pollcode/", (req, res, next) => pollPage(req, res, next));
 
-// Poll request with results override
-app.get("/overrideresultsenable/:pollcode/", (req, res, next) => pollPage(req, res, next, true));
+// Poll request with results override (LEAVE THIS COMMENTED IN PRODUCTION!!!!)
+//app.get("/overrideresultsenable/:pollcode/", (req, res, next) => pollPage(req, res, next, true));
 
 // When no poll code is supplied
 app.get("/poll", (req, res) => res.redirect("/"));
 
-// Reset all poll keys to zero
-app.get("/resetallpollkeystozero/:pollcode/", (req, res, next) => {
+// Reset all poll keys to zero (LEAVE THIS COMMENTED IN PRODUCTION!!!!)
+/* app.get("/resetallpollkeystozero/:pollcode/", (req, res, next) => {
     let pollcode = req.params["pollcode"].toLowerCase();
     let polldataFile = "./polldata/" + pollcode.toString() + ".json";
 
@@ -159,7 +159,7 @@ app.get("/resetallpollkeystozero/:pollcode/", (req, res, next) => {
             res.send('OK')
         });
     });
-});
+}); */
 
 // Last non-error handling middleware - 404 When nothing else has responded
 app.use((req, res, next) => {
