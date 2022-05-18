@@ -1,0 +1,70 @@
+<div id="voteSection">
+    <h2>Which is better?</h2>
+    <div class="contentbox">
+        <p>Choose the one you prefer.</p>
+        <div id="form" data-pollcode="<%= pollCode %>">
+            <button class="textbox left noTransitionL" id="button1" data-choice="<%= btn1 %>"><%= btn1 %></button>
+            <div class="spacer"></div>
+            <button class="textbox right noTransitionR" id="button2" data-choice="<%= btn2 %>"><%= btn2 %></button>
+        </div>
+        <div class="spacer" allowSkip></div>
+        <% if(allowSkip){ %>
+            <a href="/poll/<%= pollCode %>" class="textbox skip">Skip</a>
+        <% } %>
+    </div>
+    <div class="spacer"></div>
+
+    <script>
+        let choice, other, pollcode, b1, b2;
+
+        $(document).ready(() => {
+            pollcode = $("#form").data("pollcode");
+            b1 = $("#button1");
+            b2 = $("#button2");
+            let process = ( b1, b2 ) => {
+                choice = b1.attr("data-choice");
+                other = b2.attr("data-choice");
+                doCaptcha();
+            }
+
+            b1.on( "click", () => process( b1, b2 ) );
+            b2.on( "click", () => process( b2, b1 ) );
+
+            //b1.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () => b1.removeClass("left"));
+            //b2.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", () => b2.removeClass("right"));
+        });
+
+        function doCaptcha(){
+            // needs for recaptacha ready
+            grecaptcha.ready(function () {
+                // do request for recaptcha token
+                // response is promise with passed token
+                grecaptcha.execute('<%= sitekey %>', { action: 'submit' }).then(function (gtoken) {
+                    $.post("/poll/"+pollcode.toString(), { choice: choice, other: other, token: gtoken }, rslt => {
+                        console.log(rslt);
+                        
+                        $("#pollname").text(rslt.pollname + " (" + rslt.totalVotes + " Votes)");
+
+                        b1.removeClass("noTransitionL").on("transitionend", () => {
+                            b1.text(rslt.btn1);
+                            b1.attr("data-choice", rslt.btn1);
+                            b1.addClass("noTransitionL");
+
+                        });
+
+                        b2.removeClass("noTransitionR").on("transitionend", () => {
+                            b2.text(rslt.btn2);
+                            b2.attr("data-choice", rslt.btn2);
+                            b2.addClass("noTransitionR");
+                        });
+
+                        if (!rslt.success) alert('You are an evil spammer! Go lick a cactus!');
+
+                    });
+                });;
+            });
+        }
+
+        
+    </script>
+</div>

@@ -1,0 +1,17 @@
+<%- include("header.html") -%>
+<body>
+    <div class="header">
+        <h1>This That</h1>
+    </div>
+    <div>
+        <h2>Which poll do you want?</h2>
+        <div class="contentbox">
+            <p>Enter a poll Code - a short word or just 6 random characters - usually provided by someone</p>
+            <form id="form" action="/poll" method="POST">
+                <input placeholder="Code Here" size="5" minlength="3" class="textbox" type="text" name="poll"></input>
+                <div class="spacer"></div>
+                <button type="submit" id="go" class="textbox">Go!</button>
+            </form>
+        </div>
+    </div>
+</body>

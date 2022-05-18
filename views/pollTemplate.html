@@ -1,0 +1,39 @@
+<%- include("header.html") -%>
+<body>
+    <div class="header">
+        <h1><a href="/">This That</a></h1>
+        <p id="pollname"><%= pollName%> (<%= totalVotes%> Votes)</p>
+    </div>
+    <%  if(active){ %>
+            <%- include("voteSection.html") -%>
+    <%  }
+        if(enableResults) { %>
+            <h2>Results</h2>
+            <div class="contentbox">
+                <% for(var result of results) { %>
+                    <div class="textbox result">
+                        <span class="resultLabel">
+                            <%= result[0] %>
+                        </span>
+                        <span class="value">
+                            <%= Math.floor(result[1]) %>
+                        </span>
+                    </div>
+                    <div class="spacer"></div>
+                <% } %>
+            </div>
+            <div>
+                <h2>How does scoring work?</h2>
+                <p class="contentbox" style="text-align: justify;">Every time you cast the vote,
+                    the thing/person you tapped on gets a point and the other one looses half a point.
+                    This means that the number shown beside each target is not the amount of votes.<br>
+                    This system heavily exaggerates the difference between things
+                    that are generaly favored and those that are not.<br>
+                    The number of total points in game is equal to the total amount of votes cast devided by two.<br>
+                    Scores can go negative.
+                    The results are shown without they're decimal places, but sould be sorted correctly.
+                </p>
+            </div>
+    <%  }
+    %>
+</body>
