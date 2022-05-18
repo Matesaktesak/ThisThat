@@ -20,7 +20,7 @@ To use it, you have to go to the link above and in the Administrator console **g
 #TODO: substitute this system for .ENV... 
 
 ### Poll config
-Every poll is created as a .json file in the *polldata* folder. **The name of the file is synonymus with the pollcode**.
+Every poll is created as a .json file in the `polldata` folder. **The name of the file is synonymus with the pollcode**.
 
 The required filds are:
 - **name** (string) - The display name of the poll
