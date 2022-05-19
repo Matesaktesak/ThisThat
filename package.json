@@ -1,7 +1,7 @@
 {
-  "name": "Thisthat",
+  "name": "ThisThat",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple vote-to-compare app ment to sort any list by public opinion",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
