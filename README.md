@@ -12,6 +12,36 @@ Some time later, I was talking to a friend leaning about NodeJS and I offerd the
 
 **This project is not maintained and is only published for learning purposes!** Only use this at your own risk. Any commits maight be merged - ooooor ignored for years...
 
+## Setup
+1. Create a new folder:
+```bash
+mkdir /srv/www/thisthat
+``` 
+and change the directory there
+```bash
+cd /srv/www/thisthat
+```
+2. Clone the repo with:
+```bash
+git clone https://github.com/Matesaktesak/ThisThat.git --progress
+```
+
+3. Install all needed packages:
+```bash
+npm i
+```
+
+4. Procede with configuring reCAPTCHA
+5. To start the server you can do either
+```bash
+./server-start
+```
+to run within PM2 or
+```bash
+node server.js
+```
+to just run a simple NodeJS process.
+
 ## Configuration
 ### reCAPTCHA
 [reCAPTCHA](https://www.google.com/recaptcha/about/) is Googles CAPTCHA service, which is free up to 1megarequest per month (as of writing). We use captcha to reduce spam in the poll.
